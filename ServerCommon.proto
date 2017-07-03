@@ -1,0 +1,17 @@
+package christliu;
+
+option py_generic_services = true;
+
+message void {}
+
+message EchoString {
+    required string message = 1;
+}
+
+service ServiceCommon {
+    rpc sayHello(EchoString) returns (void);
+}
+
+service ClientCommon {
+    rpc helloRespond(EchoString) returns (void);
+}
