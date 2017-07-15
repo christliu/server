@@ -1,1 +1,3 @@
-python GameServer.py
+export PYTHONPATH="./"
+
+python distserver/gate/GateServer.py
