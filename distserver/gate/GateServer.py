@@ -1,18 +1,18 @@
 from distserver.Server import Server
 from protocol.TcpServer import TcpServer
 from protocol.TcpClient import TcpClient
-from protocol.ClientHandler import ClientHandler
+# from protocol.ClientHandler import ClientHandler
 import asyncore
 
 
-class GameServerClientHandler(ClientHandler):
+class GameServerClientHandler(object):
     def __init__(self):
         super(GameServerClientHandler, self).__init__()
         print "gameserverclient handler"
 
     def onConnect(self):
-        print "Gate connect to server"
-        self.tcpClient.send("connect to server")
+        print "Gate connect to server ", getattr(self, "connection", "None")
+        self.connection.write_data("connect to server")
 
     def onRead(self, msg):
         print "Gate read msg ", msg

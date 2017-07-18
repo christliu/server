@@ -9,7 +9,7 @@ class TcpServer(asyncore.dispatcher):
         self.ip = ip
         self.port = port
         self.serviceManager = serviceManager
-        self.conns = set()
+        # self.conns = set()
 
     def run(self):
         self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -24,8 +24,12 @@ class TcpServer(asyncore.dispatcher):
         print "addr by sock ", sock.getpeername()
         print "addr ", addr
         connection = TcpConnection(sock)
+        print "socket of connection ", connection.socket
+        connection.setSockOpt()
+        self.serviceManager and self.serviceManager.onAccept(connection)
 
-        self.conns.add(connection)
+        # self.conns.add(connection)
+        # connection.send("abc")
 
     def stop(self):
         self.close()

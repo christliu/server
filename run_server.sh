@@ -1,3 +1,3 @@
 export PYTHONPATH="./"
 
-python distserver/gate/GateServer.py
+python distserver/game/GameServer.py

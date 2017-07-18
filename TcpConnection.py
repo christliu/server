@@ -22,8 +22,11 @@ class TcpConnection(asyncore.dispatcher):
     def setsockopt(self):
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
 
-    def handle_read(self):
+    def setHandler(self, handler):
+        self.handler = handler
+        handler.tcpClient = self
 
+    def handle_read(self):
         data = self.recv(self.read_size)
         print "in headle read ",data
         if data and self.rpc_channel:
@@ -40,6 +43,6 @@ class TcpConnection(asyncore.dispatcher):
         self.write_buff += data
 
     def writable(self):
-        return self.write_buff
+        return self.write_buff and self.socket
 
 
